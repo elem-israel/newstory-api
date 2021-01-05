@@ -29,10 +29,10 @@ jobs:
         continue-on-error: true
 
       - run: |
-          docker build . -t newstorycontainerregistry.azurecr.io/web:${{ github.sha }}
-          docker tag newstorycontainerregistry.azurecr.io/web:${{ github.sha }} newstorycontainerregistry.azurecr.io/web:latest
-          docker push newstorycontainerregistry.azurecr.io/web:${{ github.sha }}
-          docker push newstorycontainerregistry.azurecr.io/web:latest
+          docker build . -t newstorycontainerregistry.azurecr.io/api:${{ github.sha }}
+          docker tag newstorycontainerregistry.azurecr.io/api:${{ github.sha }} newstorycontainerregistry.azurecr.io/web:latest
+          docker push newstorycontainerregistry.azurecr.io/api:${{ github.sha }}
+          docker push newstorycontainerregistry.azurecr.io/api:latest
 
       - name: Azure logout
         run: |

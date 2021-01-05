@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { BlobServiceClient } from "@azure/storage-blob";
-import * as celery from "celery-node";
 
 const blobServiceClient = BlobServiceClient.fromConnectionString(
   process.env.AZURE_STORAGE_CONNECTION_STRING as string

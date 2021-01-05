@@ -14,11 +14,6 @@ jobs:
         with:
           ref: master
 
-      - name: 'Login via Azure CLI'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       - uses: azure/docker-login@v1
         with:
           login-server: newstorycontainerregistry.azurecr.io
@@ -30,10 +25,6 @@ jobs:
 
       - run: |
           docker build . -t newstorycontainerregistry.azurecr.io/api:${{ github.sha }}
-          docker tag newstorycontainerregistry.azurecr.io/api:${{ github.sha }} newstorycontainerregistry.azurecr.io/web:latest
+          docker tag newstorycontainerregistry.azurecr.io/api:${{ github.sha }} newstorycontainerregistry.azurecr.io/api:latest
           docker push newstorycontainerregistry.azurecr.io/api:${{ github.sha }}
           docker push newstorycontainerregistry.azurecr.io/api:latest
-
-      - name: Azure logout
-        run: |
-          az logout

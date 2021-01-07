@@ -3,5 +3,5 @@
   "ignore": [
     "src/**/*.spec.ts"
   ],
-  "exec": "node -r ts-node/register -r dotenv/config src/index.ts"
+  "exec": "node -r ts-node/register -r dotenv/config --unhandled-rejections=strict src/index.ts"
 }

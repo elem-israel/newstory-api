@@ -9,6 +9,10 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 app.get("/", function (req: Request, res: Response) {
+  const { code, session_state } = req.query;
+  if (code && session_state) {
+    return res.redirect(`/auth/token/${code}`)
+  }
   res.send("Hello World");
 });
 
@@ -20,8 +24,8 @@ if (
   app.use(keycloak.protect());
 }
 
-if (Number.parseInt(process.env.TEST_AUTH)){
-  installDevKeycloak(app)
+if (Number.parseInt(process.env.TEST_AUTH)) {
+  installDevKeycloak(app);
   app.use(keycloak.protect());
 }
 

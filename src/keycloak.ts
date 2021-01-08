@@ -5,8 +5,6 @@ import * as fs from "fs";
 import { getRedisClient, redisConfig } from "./redis";
 import RedisStoreBuilder from "connect-redis";
 
-export let keycloak: KeyCloakClient;
-
 export function installKeycloak(app: Express) {
   const RedisStore = RedisStoreBuilder(session);
 
@@ -25,7 +23,7 @@ export function installKeycloak(app: Express) {
     ? JSON.parse(fs.readFileSync("/etc/keycloak/keycloak.json").toString())
     : null;
 
-  keycloak = new Keycloak({ store: redisStore }, config);
+  const keycloak = new Keycloak({ store: redisStore }, config);
 
   app.use(
     session({
@@ -38,12 +36,13 @@ export function installKeycloak(app: Express) {
     })
   );
   app.use(keycloak.middleware());
+  app.use(keycloak.protect());
 }
 
 export function installDevKeycloak(app: Express) {
   const memoryStore = new session.MemoryStore();
 
-  keycloak = new Keycloak({ store: memoryStore });
+  const keycloak = new Keycloak({ store: memoryStore });
 
   app.use(
     session({
@@ -54,4 +53,5 @@ export function installDevKeycloak(app: Express) {
     })
   );
   app.use(keycloak.middleware());
+  app.use(keycloak.protect());
 }

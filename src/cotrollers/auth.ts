@@ -10,11 +10,10 @@ export function getUser(req: Request & { kauth: any }, res: Response) {
 
 export async function getToken(req: Request & { kauth: any }, res: Response) {
   const data = {
-    client_id: "newstory-react-dev",
+    client_id: process.env.KEYCLOAK_CLIENT_ID,
     grant_type: "authorization_code",
     code: req.params.code,
   };
-  console.log({ data });
   return axios
     .post(process.env.KEYCLOAK_TOKEN_ENDPOINT, qs.stringify(data))
     .then(({ data }: any) => res.send(data))

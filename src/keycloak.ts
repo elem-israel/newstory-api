@@ -36,6 +36,7 @@ export function installKeycloak(app: Express) {
     })
   );
   app.use(keycloak.middleware());
+  app.use(keycloak.protect());
 }
 
 export function installDevKeycloak(app: Express) {
@@ -52,4 +53,5 @@ export function installDevKeycloak(app: Express) {
     })
   );
   app.use(keycloak.middleware());
+  app.use(keycloak.protect());
 }

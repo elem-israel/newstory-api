@@ -8,6 +8,7 @@ RUN npm run build
 FROM node:12-alpine
 WORKDIR /app
 COPY --from=ts-builder ./app/dist /app/dist
+COPY data /app/data
 COPY *.json /app/
 RUN npm install --production
 CMD npm start

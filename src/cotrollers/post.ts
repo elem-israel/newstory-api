@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import * as sql from "mssql";
 import Knex from "knex";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 function* range(start: number, stop: number, step = 1) {
   if (stop == null) {

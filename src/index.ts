@@ -3,7 +3,6 @@ require("express-async-errors");
 import morgan from "morgan";
 import routes from "./routes";
 import { installDevKeycloak, installKeycloak } from "./keycloak";
-import bodyParser from "body-parser";
 import { getToken } from "./cotrollers/auth";
 
 const port = process.env.PORT || 3000;
@@ -29,10 +28,10 @@ app.get("/login", (req, res) => {
 
 if (process.env.NODE_ENV === "production") {
   installKeycloak(app);
-} else {
+} else if (process.env.USE_AUTH) {
   installDevKeycloak(app);
 }
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use("/", routes);
 app.listen(port, () => console.log(`server listening on port ${port}`));

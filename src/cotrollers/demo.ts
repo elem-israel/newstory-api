@@ -53,9 +53,8 @@ export async function randomImage(req: Request, res: Response) {
   ).toString();
   return res.send([
     {
-      photo_path: photoPath,
+      photoPath,
       id: 27216,
-      post_id: "2336218034464005146",
       username: "annabelle.r_",
       url: `https://${process.env.AZURE_ACCOUNT_NAME}.blob.core.windows.net/${containerName}/${blobName}?${blobSAS}`,
     },

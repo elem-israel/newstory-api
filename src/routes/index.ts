@@ -5,8 +5,8 @@ import demo from "./demo";
 
 const router = express.Router();
 
-router.use("/post", post);
 router.use("/demo", demo);
+router.use("/post", post);
 router.use("/auth", auth);
 
 export default router;
